@@ -8,5 +8,23 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.join(__dirname, 'public/js')
-  }
+  },
+  // ES2015（ES6）のコードをES5のコードに変換するローダーの設定
+  module: {
+    rules: [
+      {
+        // ローダーの処理対象ファイル
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [['@babel/preset-env', { modules: false }]]
+            }
+          }
+        ]
+      }
+    ]
+  },
 };
